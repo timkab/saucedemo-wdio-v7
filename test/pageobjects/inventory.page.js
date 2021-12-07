@@ -7,6 +7,10 @@ class InventoryPage extends Page {
     /**
      * define selectors using getter methods
      */
+     get currentUrl() {
+        return $('//*[@id="header_container"]//*[@class="title"]');
+    }
+
     get pageTitle() {
         return $('//*[@id="header_container"]//*[@class="title"]');
     }

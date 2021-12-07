@@ -2,13 +2,13 @@ const LoginPage = require('../pageobjects/login.page');
 const InventoryPage = require('../pageobjects/inventory.page');
 const inventoryPage = require('../pageobjects/inventory.page');
 
-describe('Verify product page items and functionality', () => {
-    before(async () => {
+describe('Verify product page listings count, item`s description and title', () => {
+    before('Login with valid credentials', async () => {
         await LoginPage.open();
         await LoginPage.login('standard_user', 'secret_sauce');
     })
 
-    it('Should verify number of items on the product page', async () => {
+    it('Should verify total number of the items on the product page', async () => {
         await expect(InventoryPage.itemsList).toBeExisting();
         await expect(InventoryPage.itemsList).toBeElementsArrayOfSize(6);
     })
@@ -23,6 +23,13 @@ describe('Verify product page items and functionality', () => {
     it('Should verify title of the item', async () => {
         await expect(InventoryPage.itemTitle).toBeExisting();
         await expect(InventoryPage.itemTitle).toHaveText('Sauce Labs Bike Light');
+    })
+})
+
+describe('Verify cart add/remove functionality', () => {
+    before('Login with valid credentials', async () => {
+        await LoginPage.open();
+        await LoginPage.login('standard_user', 'secret_sauce');
     })
 
     it('Should Add item to the cart', async () => {
